@@ -1,0 +1,27 @@
+import pandas as pd
+import numpy as np 
+import re
+import sys
+import os
+import matplotlib.pyplot as plt 
+
+data = pd.read_csv('Emergency department waiting time.csv')
+
+mycol = ["time period","measure","patient cohort","data value"]
+df = pd.DataFrame(columns=mycol)
+
+emptylist=[]
+emptylist.append(data["time period"])
+emptylist.append(data["measure"])
+emptylist.append(data["patient cohort"])
+emptylist.append(data["data value"])
+listSeries = pd.Series(emptylist, index=mycol)
+df = df.append(listSeries, ignore_index=True)
+
+
+plt.bar(df['data value'], df['patient cohort'])
+plt.title('Emergency department waiting time', fontsize=10)
+plt.xlabel('patient cohort in different years', fontsize=10)
+plt.ylabel('percentage of patients', fontsize=10)
+plt.grid(True)
+plt.show()
